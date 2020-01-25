@@ -32,23 +32,22 @@ class App extends Component {
   render() {
     if (this.state.loading) return <div>loading</div>;
     return (
-      // <div>
-      //   Username: {this.state.user && this.state.user.displayName}
-      //   <br />
-      //   {this.state.user ?
-      //     (<button onClick={this.logout}>Logout</button>) :
-      //     (<SignInScreen />)
-      //   }
-      // </div>
-      <BrowserRouter>
-        <div>
-          <Route exact path='/' component={SignInScreen} />
-          <Route path='/main' render={props => <Main user={this.state.user} logout={() => this.logout()} />} />
-          {/* <Route path='/create' render={props => <Create user={this.state.user} />} />
+      <div>
+        {/* Username: {this.state.user && this.state.user.displayName} */}
+        {/* <br /> */}
+        {!this.state.user ?
+          (<SignInScreen />) :
+          <BrowserRouter>
+            <div>
+              {/* <Route exact path='/' component={SignInScreen} /> */}
+              <Route path='/' render={props => <Main user={this.state.user} logout={() => this.logout()} />} />
+              {/* <Route path='/create' render={props => <Create user={this.state.user} />} />
           <Route path='/read' render={props => <Read user={this.state.user} />} /> */}
-          {/* <Route path='/friends' component={Friends} /> */}
-        </div>
-      </BrowserRouter>
+              {/* <Route path='/friends' component={Friends} /> */}
+            </div>
+          </BrowserRouter>
+        }
+      </div>
     );
   }
 }

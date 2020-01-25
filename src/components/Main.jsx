@@ -14,14 +14,14 @@ const Main = props => {
           <legend>menu</legend>
           <ul>
             <li><button onClick={() => props.logout()}>ログアウト</button></li>
-            <li><Link to='/main/read'>一覧を見る</Link></li>
-            <li><Link to='/main/create'>データをつくる</Link></li>
+            <li><Link to='/read'>一覧を見る</Link></li>
+            <li><Link to='/create'>データをつくる</Link></li>
           </ul>
         </fieldset>
         <div>
-          <Route exact path='/main/read' render={props => <Read user={data.user} />} />
-          <Route path='/main/create' render={props => <Create user={data.user} />} />
-          <Route path='/main/read/:id' component={Record} />
+          <Route exact path='/read' render={props => <Read user={data.user} />} />
+          <Route path='/create' render={props => <Create user={data.user} />} />
+          <Route path='/read/:id' component={Record} />
         </div>
       </BrowserRouter>
     </div>
