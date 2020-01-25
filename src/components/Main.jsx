@@ -10,11 +10,14 @@ const Main = props => {
   return (
     <div>
       <BrowserRouter>
-        <ul>
-          <li><button onClick={() => props.logout()}>ログアウト</button></li>
-          <li><Link to='/main/read'>一覧を見る</Link></li>
-          <li><Link to='/main/create'>データをつくる</Link></li>
-        </ul>
+        <fieldset>
+          <legend>menu</legend>
+          <ul>
+            <li><button onClick={() => props.logout()}>ログアウト</button></li>
+            <li><Link to='/main/read'>一覧を見る</Link></li>
+            <li><Link to='/main/create'>データをつくる</Link></li>
+          </ul>
+        </fieldset>
         <div>
           <Route exact path='/main/read' render={props => <Read user={data.user} />} />
           <Route path='/main/create' render={props => <Create user={data.user} />} />

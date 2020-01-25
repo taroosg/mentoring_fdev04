@@ -30,7 +30,8 @@ const Read = props => {
   }, [props])
 
   return (
-    <div>
+    <fieldset>
+      <legend>データ一覧</legend>
       <ul>
         {data.map((x, index) => {
           return (
@@ -46,7 +47,7 @@ const Read = props => {
         })}
       </ul>
 
-    </div>
+    </fieldset>
   )
 
 }

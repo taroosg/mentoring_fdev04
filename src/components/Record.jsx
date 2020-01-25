@@ -26,7 +26,8 @@ const Record = props => {
   }, [id])
 
   return (
-    <div>
+    <fieldset>
+      <legend>データ詳細</legend>
       <p>documentId: {id}</p>
       {/* <p>{JSON.stringify(record)}</p> */}
       <p>相手： {record.title}</p>
@@ -34,7 +35,7 @@ const Record = props => {
       <p>総額： {record.total}</p>
       {/* <ul>詳細： {JSON.stringify(record.costs)}</ul> */}
       <ul>詳細： {record.costs && record.costs.map((x, index) => <li key={index}>{JSON.stringify(x)}</li>)}</ul>
-    </div>
+    </fieldset>
   )
 }
 

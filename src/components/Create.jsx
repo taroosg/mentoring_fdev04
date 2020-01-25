@@ -73,7 +73,8 @@ const Create = props => {
   }
 
   return (
-    <div>
+    <fieldset>
+      <legend>データ作成</legend>
       <p>uid: {props.user.uid}</p>
       <form action="">
         <div>
@@ -137,7 +138,7 @@ const Create = props => {
         })}
       </ul>
 
-    </div>
+    </fieldset>
   )
 }
 
