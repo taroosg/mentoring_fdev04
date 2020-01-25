@@ -41,7 +41,7 @@ const Read = props => {
               <p>duration: {x.data.duration}</p>
               <p>cost / day (¥): {x.data.total / x.data.duration}</p>
               {/* <p><span onClick={() => { }}>☓</span>{JSON.stringify(x.data)}</p> */}
-              <Link to={`/main/read/record/${x.id}`}>詳細</Link>
+              <Link to={`./read/${x.id}`}>詳細</Link>
             </li>
           );
         })}

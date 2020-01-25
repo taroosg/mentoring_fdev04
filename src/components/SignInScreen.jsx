@@ -4,7 +4,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 const uiConfig = {
   signInFlow: 'redirect',
-  signInSuccessUrl: "/main/read",
+  signInSuccessUrl: "./main/read",
   signInOptions: [
     // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     // firebase.auth.FacebookAuthProvider.PROVIDER_ID,

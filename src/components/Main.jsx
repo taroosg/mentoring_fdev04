@@ -21,7 +21,7 @@ const Main = props => {
         <div>
           <Route exact path='/main/read' render={props => <Read user={data.user} />} />
           <Route path='/main/create' render={props => <Create user={data.user} />} />
-          <Route path='/main/read/record/:id' component={Record} />
+          <Route path='/main/read/:id' component={Record} />
         </div>
       </BrowserRouter>
     </div>
