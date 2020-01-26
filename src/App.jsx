@@ -34,17 +34,10 @@ class App extends Component {
     return (
       <div>
         {/* Username: {this.state.user && this.state.user.displayName} */}
-        {/* <br /> */}
         {!this.state.user ?
-          (<SignInScreen />) :
+          <SignInScreen /> :
           <BrowserRouter>
-            <div>
-              {/* <Route exact path='/' component={SignInScreen} /> */}
-              <Route path='/' render={props => <Main user={this.state.user} logout={() => this.logout()} />} />
-              {/* <Route path='/create' render={props => <Create user={this.state.user} />} />
-          <Route path='/read' render={props => <Read user={this.state.user} />} /> */}
-              {/* <Route path='/friends' component={Friends} /> */}
-            </div>
+            <Route path='/' render={props => <Main user={this.state.user} logout={() => this.logout()} />} />
           </BrowserRouter>
         }
       </div>

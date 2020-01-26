@@ -7,7 +7,6 @@ const Read = props => {
   useEffect(() => {
     const posts = firebase.firestore().collection('posts')
     // const toDay = new Date();
-
     // 更新イベント監視
     posts
       .where('user_id', '==', props.user.uid)
@@ -29,20 +28,39 @@ const Read = props => {
     // useEffectの外から持ってきた値は↓のように初期化する必がある
   }, [props])
 
+  const deleteRecord = docId => {
+    const record = firebase.firestore().collection('posts').doc(docId);
+    record.delete()
+      .then(() => {
+        console.log('deleted');
+      })
+  }
+
   return (
     <fieldset>
       <legend>データ一覧</legend>
       <ul>
         {data.map((x, index) => {
           return (
-            <li key={index} id={x.id}>
-              <p>title: {x.data.title}</p>
+            <fieldset key={index} id={x.id}>
+              <legend>
+                {x.data.title}
+                <button onClick={() => { deleteRecord(x.id) }}>削除</button>
+              </legend>
               <p>totalCost (¥): {x.data.total}</p>
               <p>duration: {x.data.duration}</p>
               <p>cost / day (¥): {x.data.total / x.data.duration}</p>
-              {/* <p><span onClick={() => { }}>☓</span>{JSON.stringify(x.data)}</p> */}
-              <Link to={`/read/${x.id}`}>詳細</Link>
-            </li>
+              <Link to={`/read/${x.id}`} >詳細</Link>
+            </fieldset>
+            // <li key={index} id={x.id}>
+            //   <p>title: {x.data.title}</p>
+            //   <p>totalCost (¥): {x.data.total}</p>
+            //   <p>duration: {x.data.duration}</p>
+            //   <p>cost / day (¥): {x.data.total / x.data.duration}</p>
+            //   {/* <p><span onClick={() => { }}>☓</span>{JSON.stringify(x.data)}</p> */}
+            //   <Link to={`/read/${x.id}`} query={() => { deleteRecord() }}>詳細</Link>
+            //   <button onClick={() => { deleteRecord(x.id) }}>削除</button>
+            // </li>
           );
         })}
       </ul>

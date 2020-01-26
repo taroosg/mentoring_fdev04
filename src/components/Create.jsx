@@ -68,7 +68,7 @@ const Create = props => {
       user_id: props.user.uid,
     }).then(result => {
       console.log(result)
-      window.location.href = `/main/read/record/${result.id}`;
+      window.location.href = `/read/${result.id}`;
     });
   }
 
@@ -118,8 +118,8 @@ const Create = props => {
 
         <div>
           <p>Costs</p>
-          <input type="number" name="cost" value={costInput.cost} onChange={handleChangeCost} />
           <input type="date" name="date" value={costInput.date} onChange={handleChangeCost} />
+          <input type="number" name="cost" value={costInput.cost} onChange={handleChangeCost} />
           <button type='button' onClick={addCost}>add</button>
         </div>
 
@@ -127,17 +127,27 @@ const Create = props => {
           <button type='button' onClick={submitData}>submit</button>
         </div>
       </form>
-
-      <ul>
-        {costs.map((x, index) => {
-          return (
-            <li key={index}>
-              <p><span onClick={() => removeCost(index)}>☓</span>{x.date}, {x.cost}</p>
-            </li>
-          );
-        })}
-      </ul>
-
+      {
+        costs.length === 0 ? ''
+          : <table>
+            <tbody>
+              <tr>
+                <th>date</th>
+                <th>cost</th>
+                <th></th>
+              </tr>
+              {costs.map((x, index) => {
+                return (
+                  <tr key={index}>
+                    <td>{x.date}</td>
+                    <td>{x.cost}</td>
+                    <td><button onClick={() => removeCost(index)}>delete</button></td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+      }
     </fieldset>
   )
 }

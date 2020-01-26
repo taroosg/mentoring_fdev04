@@ -9,6 +9,7 @@ const Record = props => {
 
   useEffect(() => {
     const record = firebase.firestore().collection('posts').doc(id);
+    console.log(id);
     // 更新イベント監視
     record
       .get()
@@ -34,7 +35,25 @@ const Record = props => {
       <p>期間： {record.duration}</p>
       <p>総額： {record.total}</p>
       {/* <ul>詳細： {JSON.stringify(record.costs)}</ul> */}
-      <ul>詳細： {record.costs && record.costs.map((x, index) => <li key={index}>{JSON.stringify(x)}</li>)}</ul>
+      <table>
+        <tbody>
+          <tr>
+            <th>日付</th>
+            <th>金額</th>
+          </tr>
+          {
+            record.costs &&
+            record.costs.map((x, index) =>
+              <tr key={index}>
+                {/* {JSON.stringify(x)} */}
+                <td>{x.date}</td>
+                <td>{x.cost}</td>
+              </tr>
+            )
+
+          }
+        </tbody>
+      </table>
     </fieldset>
   )
 }
