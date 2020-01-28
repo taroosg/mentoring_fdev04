@@ -12,6 +12,7 @@ const Main = props => {
       <BrowserRouter>
         <fieldset>
           <legend>menu</legend>
+          <p>Hi, {data.user.uid}</p>
           <ul>
             <li><button onClick={() => props.logout()}>ログアウト</button></li>
             <li><Link to='/read'>一覧を見る</Link></li>

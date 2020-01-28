@@ -1,10 +1,44 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import React, { Component, useState, useEffect } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom'
 import firebase from './firebase';
 import SignInScreen from './components/SignInScreen';
 import Main from './components/Main';
 // import Create from './components/Create';
 // import Read from './components/Read';
+
+const App1 = () => {
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(userData => {
+      console.log(userData);
+      setLoading(false);
+      setUser(userData);
+    });
+  }, []);
+
+  const logout = () => {
+    firebase.auth().signOut();
+    window.location.href = '/';
+  }
+
+  console.log(user);
+  // if (loading) return <div>loading</div>;
+  return (
+    <div>
+      {user && <p>Hi, {user.uid}</p>}
+      {!user ?
+        <SignInScreen /> :
+        <BrowserRouter>
+          <Route path='/' render={props => <Main user={user} logout={() => logout()} />} />
+        </BrowserRouter>
+      }
+    </div>
+  );
+
+}
+
 
 class App extends Component {
   state = {
@@ -27,13 +61,11 @@ class App extends Component {
     window.location.href = '/';
   }
 
-  hoge = 'fuga';
 
   render() {
     if (this.state.loading) return <div>loading</div>;
     return (
       <div>
-        {/* Username: {this.state.user && this.state.user.displayName} */}
         {!this.state.user ?
           <SignInScreen /> :
           <BrowserRouter>

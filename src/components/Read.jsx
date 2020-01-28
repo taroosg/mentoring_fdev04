@@ -5,8 +5,8 @@ import firebase from '../firebase';
 const Read = props => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    const posts = firebase.firestore().collection('posts')
-    // const toDay = new Date();
+    const posts = firebase.firestore().collection('posts');
+    const toDay = new Date();
     // 更新イベント監視
     posts
       .where('user_id', '==', props.user.uid)
@@ -18,8 +18,8 @@ const Read = props => {
             data: {
               ...x.data(),
               total: x.data().costs.map(x => Number(x.cost)).reduce((pre, now) => pre + now),
-              // duration: Math.ceil(((toDay.getTime() / 1000) - x.data().started_at.seconds) / 60 / 60 / 24),
-              duration: Math.ceil((x.data().created_at.seconds - x.data().started_at.seconds) / 60 / 60 / 24),
+              duration1: Math.ceil((x.data().created_at.seconds - x.data().started_at.seconds) / 60 / 60 / 24),
+              duration2: Math.ceil(((toDay.getTime() / 1000) - x.data().started_at.seconds) / 60 / 60 / 24),
             },
           }
         });
@@ -48,8 +48,10 @@ const Read = props => {
                 <button onClick={() => { deleteRecord(x.id) }}>削除</button>
               </legend>
               <p>totalCost (¥): {x.data.total}</p>
-              <p>duration: {x.data.duration}</p>
-              <p>cost / day (¥): {x.data.total / x.data.duration}</p>
+              <p>duration1: {x.data.duration1}</p>
+              <p>duration2: {x.data.duration2}</p>
+              <p>cost / day1 (¥): {x.data.total / x.data.duration1}</p>
+              <p>cost / day2 (¥): {x.data.total / x.data.duration2}</p>
               <Link to={`/read/${x.id}`} >詳細</Link>
             </fieldset>
             // <li key={index} id={x.id}>

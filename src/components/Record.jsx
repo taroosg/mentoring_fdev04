@@ -8,8 +8,8 @@ const Record = props => {
   // const [totalCost, setTotalCost] = useState('');
 
   useEffect(() => {
+    const toDay = new Date();
     const record = firebase.firestore().collection('posts').doc(id);
-    console.log(id);
     // 更新イベント監視
     record
       .get()
@@ -19,22 +19,22 @@ const Record = props => {
           {
             ...doc.data(),
             total: doc.data().costs.map(x => Number(x.cost)).reduce((pre, now) => pre + now),
-            duration: Math.ceil((doc.data().created_at.seconds - doc.data().started_at.seconds) / 60 / 60 / 24),
+            duration1: Math.ceil((doc.data().created_at.seconds - doc.data().started_at.seconds) / 60 / 60 / 24),
+            duration2: Math.ceil(((toDay.getTime() / 1000) - doc.data().started_at.seconds) / 60 / 60 / 24),
           }
         )
-        // setRecord(doc.data().costs.map(x => Number(x.cost)).reduce((pre, now) => pre + now));
       })
   }, [id])
 
   return (
     <fieldset>
       <legend>データ詳細</legend>
-      <p>documentId: {id}</p>
+      {/* <p>documentId: {id}</p> */}
       {/* <p>{JSON.stringify(record)}</p> */}
-      <p>相手： {record.title}</p>
-      <p>期間： {record.duration}</p>
-      <p>総額： {record.total}</p>
-      {/* <ul>詳細： {JSON.stringify(record.costs)}</ul> */}
+      <p>title: {record.title}</p>
+      <p>duration1: {record.duration1}</p>
+      <p>duration2: {record.duration2}</p>
+      <p>totalCost: {record.total}</p>
       <table>
         <tbody>
           <tr>
@@ -45,12 +45,10 @@ const Record = props => {
             record.costs &&
             record.costs.map((x, index) =>
               <tr key={index}>
-                {/* {JSON.stringify(x)} */}
                 <td>{x.date}</td>
                 <td>{x.cost}</td>
               </tr>
             )
-
           }
         </tbody>
       </table>

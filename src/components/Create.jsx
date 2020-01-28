@@ -75,7 +75,7 @@ const Create = props => {
   return (
     <fieldset>
       <legend>データ作成</legend>
-      <p>uid: {props.user.uid}</p>
+      {/* <p>uid: {props.user.uid}</p> */}
       <form action="">
         <div>
           <label htmlFor="title">title</label>
